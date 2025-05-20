@@ -6,84 +6,255 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:59:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 22:00:47 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/20 13:47:23 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// src/main.cpp
-#include "Bureaucrat.hpp" // Assuming Bureaucrat.hpp is in the 'includes' directory
 #include <iostream>
-#include <exception> // For std::exception
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-// The main function - entry point of your program
-int main() {
-    // Example Usage of Bureaucrat
+void    testBureaucratConstruction() {
+    std::cout << "\n--- Testing Bureaucrat Construction ---" << std::endl;
+    // Valid construction
     try {
-        Bureaucrat b1("Alice", 1); // Highest grade
+        Bureaucrat b1("Alice", 1);
         std::cout << b1 << std::endl;
-
-        b1.decrementGrade(); // Grade becomes 2
-        std::cout << "After decrement: " << b1 << std::endl;
-
-        b1.incrementGrade(); // Grade becomes 1 again
-        std::cout << "After increment: " << b1 << std::endl;
-
-        Bureaucrat b2("Bob", 150); // Lowest grade
+        Bureaucrat b2("Bob", 150);
         std::cout << b2 << std::endl;
-
-        // b2.decrementGrade(); // This should ideally throw GradeTooLowException or print an error
-                            // if you implemented the boundary checks correctly.
-
-        // b1.incrementGrade(); // This should ideally throw GradeTooHighException or print an error.
-
-
         Bureaucrat b3("Charlie", 75);
         std::cout << b3 << std::endl;
-
-        Bureaucrat b4 = b3; // Test copy constructor
-        std::cout << "Copied b4: " << b4 << std::endl;
-
-        Bureaucrat b5("Dave", 100);
-        b5 = b1; // Test assignment operator
-        std::cout << "Assigned b5 from b1: " << b5 << std::endl;
-        std::cout << "Original b1 (name should be unchanged): " << b1 << std::endl;
-
-
-        // Test exceptions (if you've implemented them)
-        std::cout << "\n--- Testing Exceptions ---" << std::endl;
-        try {
-            Bureaucrat tooHigh("HighScorer", 0); // Should trigger an error or be clamped
-            std::cout << tooHigh << std::endl;
-        } catch (const Bureaucrat::GradeTooHighException& e) {
-            std::cerr << "Caught exception: " << e.what() << std::endl;
-        } catch (const std::exception& e) { // Catch any other standard exceptions
-            std::cerr << "Caught standard exception: " << e.what() << std::endl;
-        }
-
-        try {
-            Bureaucrat tooLow("LowScorer", 151); // Should trigger an error or be clamped
-            std::cout << tooLow << std::endl;
-        } catch (const Bureaucrat::GradeTooLowException& e) {
-            std::cerr << "Caught exception: " << e.what() << std::endl;
-        } catch (const std::exception& e) {
-            std::cerr << "Caught standard exception: " << e.what() << std::endl;
-        }
-
-        // Example of trying to increment beyond the highest grade
-        try {
-            Bureaucrat top("TopRank", 1);
-            std::cout << top << std::endl;
-            top.incrementGrade(); // Attempt to go higher than 1
-            std::cout << "After trying to increment past highest: " << top << std::endl;
-        } catch (const Bureaucrat::GradeTooHighException& e) {
-            std::cerr << "Caught exception during increment: " << e.what() << std::endl;
-        }
-
-
     } catch (const std::exception& e) {
-        std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
-        return 1; // Indicate an error
+        std::cerr << "Unexpected exception: " << e.what() << std::endl;
     }
 
-    return 0; // Indicate successful execution
+    // Invalid construction (grade too high)
+    try {
+        Bureaucrat b_high("HighGradeHarry", 0);
+        std::cout << b_high << std::endl;
+    } catch (const Bureaucrat::GradeTooHighException& e) {
+        std::cerr << "Caught expected exception: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Caught unexpected exception: " << e.what() << std::endl;
+    }
+
+    // Invalid construction (grade too low)
+    try {
+        Bureaucrat b_low("LowGradeLarry", 151);
+        std::cout << b_low << std::endl;
+    } catch (const Bureaucrat::GradeTooLowException& e) {
+        std::cerr << "Caught expected exception: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Caught unexpected exception: " << e.what() << std::endl;
+    }
+}
+
+void    testBureaucratGradeChanges() {
+    std::cout << "\n--- Testing Bureaucrat Grade Changes ---" << std::endl;
+    Bureaucrat b("David", 75);
+    std::cout << "Initial: " << b << std::endl;
+
+    // Increment grade
+    try {
+        b.incrementGrade();
+        std::cout << "After increment: " << b << std::endl; // Should be 74
+    } catch (const std::exception& e) {
+        std::cerr << "Error incrementing grade: " << e.what() << std::endl;
+    }
+
+    // Decrement grade
+    try {
+        b.decrementGrade();
+        std::cout << "After decrement: " << b << std::endl; // Should be 75
+        b.decrementGrade();
+        std::cout << "After decrement: " << b << std::endl; // Should be 76
+    } catch (const std::exception& e) {
+        std::cerr << "Error decrementing grade: " << e.what() << std::endl;
+    }
+
+    // Increment to highest
+    Bureaucrat b_high("Eve", 2);
+    std::cout << "Initial Eve: " << b_high << std::endl;
+    try {
+        b_high.incrementGrade(); // To 1
+        std::cout << "Eve after increment: " << b_high << std::endl;
+        b_high.incrementGrade(); // Should throw
+        std::cout << "Eve after 2nd increment (should not reach): " << b_high << std::endl;
+    } catch (const Bureaucrat::GradeTooHighException& e) {
+        std::cerr << "Eve: Caught expected GradeTooHighException: " << e.what() << std::endl;
+        std::cout << "Eve final state: " << b_high << std::endl; // Should be 1
+    }
+
+    // Decrement to lowest
+    Bureaucrat b_low("Frank", 149);
+    std::cout << "Initial Frank: " << b_low << std::endl;
+    try {
+        b_low.decrementGrade(); // To 150
+        std::cout << "Frank after decrement: " << b_low << std::endl;
+        b_low.decrementGrade(); // Should throw
+        std::cout << "Frank after 2nd decrement (should not reach): " << b_low << std::endl;
+    } catch (const Bureaucrat::GradeTooLowException& e) {
+        std::cerr << "Frank: Caught expected GradeTooLowException: " << e.what() << std::endl;
+         std::cout << "Frank final state: " << b_low << std::endl; // Should be 150
+    }
+}
+
+void    testFormConstruction() {
+    std::cout << "\n--- Testing Form Construction ---" << std::endl;
+    // Valid construction
+    try {
+        Form f1("Tax Form A", false, 50, 25);
+        std::cout << f1 << std::endl;
+        Form f2("Secret Document X", false, 1, 1);
+        std::cout << f2 << std::endl;
+        Form f3("Leave Request", false, 150, 100);
+        std::cout << f3 << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Unexpected exception: " << e.what() << std::endl;
+    }
+
+    // Invalid construction (grade to sign too high)
+    try {
+        Form f_invalid("Invalid Form Sign High", false, 0, 50);
+        std::cout << f_invalid << std::endl;
+    } catch (const Form::GradeTooHighException& e) {
+        std::cerr << "Caught expected exception for sign grade too high: " << e.what() << std::endl;
+    }
+    // Invalid construction (grade to exec too high)
+    try {
+        Form f_invalid("Invalid Form Exec High", false, 50, 0);
+        std::cout << f_invalid << std::endl;
+    } catch (const Form::GradeTooHighException& e) {
+        std::cerr << "Caught expected exception for exec grade too high: " << e.what() << std::endl;
+    }
+
+    // Invalid construction (grade to sign too low)
+    try {
+        Form f_invalid("Invalid Form Sign Low", false, 151, 50);
+        std::cout << f_invalid << std::endl;
+    } catch (const Form::GradeTooLowException& e) {
+        std::cerr << "Caught expected exception for sign grade too low: " << e.what() << std::endl;
+    }
+    // Invalid construction (grade to exec too low)
+    try {
+        Form f_invalid("Invalid Form Exec Low", false, 50, 151);
+        std::cout << f_invalid << std::endl;
+    } catch (const Form::GradeTooLowException& e) {
+        std::cerr << "Caught expected exception for exec grade too low: " << e.what() << std::endl;
+    }
+}
+
+void	myTestOk()
+{
+    std::cout << "\n\n\n------------------------------------" << std::endl;
+    std::cout << "--- Testing Form Signing Process ---" << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+	std::cout << "~-~- TEST1 (everything's ok :) ) -~-~" << std::endl;
+    Bureaucrat a_capable("Paul", 40);
+	std::cout << a_capable << std::endl;
+    Form form_b("Project Beta", false, 50, 20);
+	std::cout << form_b << std::endl;
+
+	try
+	{
+    	a_capable.signForm(form_b);
+	}
+	catch (const std::exception& e) {
+        std::cerr << "Error during Henry's direct sign: " << e.what() << std::endl;
+    }
+	std::cout << form_b << std::endl;
+}
+
+void	myTestTooLow()
+{
+    std::cout << "\n\n\n------------------------------------" << std::endl;
+    std::cout << "--- Testing Form Signing Process ---" << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+	std::cout << "~-~- TEST1 2 (grade too low) -~-~" << std::endl;
+    Bureaucrat b_incapable("Henry", 60);
+	std::cout << b_incapable << std::endl;
+	Form form_b("Project Beta", false, 50, 20);
+	std::cout << form_b << std::endl;
+	try
+	{
+    	b_incapable.signForm(form_b);
+	}
+	catch (const std::exception& e) {
+        std::cerr	<< b_incapable.getName()
+					<< " couldn't sign " << form_b.getName()
+					<< " because of " << e.what() << std::endl;
+    }
+	std::cout << form_b << std::endl;
+}
+
+void	myTestSignAgain()
+{
+    std::cout << "\n\n\n------------------------------------" << std::endl;
+    std::cout << "--- Testing Form Signing Process ---" << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+	std::cout << "~-~- TEST3 (sign two time the same form) ) -~-~" << std::endl;
+    Bureaucrat a_capable("Paul", 40);
+	std::cout << a_capable << std::endl;
+    Form form_b("Project Beta", false, 50, 20);
+	std::cout << form_b << std::endl;
+	try
+	{
+    	a_capable.signForm(form_b);
+    	a_capable.signForm(form_b);
+	}
+
+	catch (const std::exception& e) {
+        std::cerr	<< a_capable.getName()
+					<< " couldn't sign " << form_b.getName()
+					<< " because of " << e.what() << std::endl;
+    }
+
+	std::cout << form_b << std::endl;
+}
+
+void	myTestNotOkThenOk()
+{
+    std::cout << "\n\n\n------------------------------------" << std::endl;
+    std::cout << "--- Testing Form Signing Process ---" << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+	std::cout << "~-~- TEST4 (not ok then ok) -~-~" << std::endl;
+    Bureaucrat b_incapable("Henry", 62);
+	std::cout << b_incapable << std::endl;
+	Form form_b("Project Beta", false, 61, 20);
+	std::cout << form_b << std::endl;
+	try
+	{
+    	b_incapable.signForm(form_b);
+	}
+	catch (const std::exception& e) {
+        std::cerr	<< b_incapable.getName()
+					<< " couldn't sign " << form_b.getName()
+					<< " because of " << e.what() << std::endl;
+    }
+	b_incapable.incrementGrade();
+	std::cout << form_b << std::endl;
+	std::cout << b_incapable << std::endl;
+	try
+	{
+    	b_incapable.signForm(form_b);
+	}
+	catch (const std::exception& e) {
+        std::cerr	<< b_incapable.getName()
+					<< " couldn't sign " << form_b.getName()
+					<< " because of " << e.what() << std::endl;
+    }
+	std::cout << form_b << std::endl;
+}
+
+int main() {
+    //testBureaucratConstruction();
+    //testBureaucratGradeChanges();
+    //testFormConstruction();
+	myTestOk();
+	myTestTooLow();
+	myTestSignAgain();
+	myTestNotOkThenOk();
+
+    std::cout << "\n--- All tests completed ---" << std::endl;
+    return 0;
 }

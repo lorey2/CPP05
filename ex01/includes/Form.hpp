@@ -6,15 +6,17 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:19:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 22:36:31 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/20 14:15:54 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
 #include <string>
 #include <iostream>
+
+class Bureaucrat;
 
 class Form
 {
@@ -33,13 +35,18 @@ class Form
 		bool			getIsSigned() const;
 		int				getGradToSign() const;
 		int				getGradToExec() const;
-		void			beSigned() const;
+		void			beSigned(Bureaucrat &bureaucrat);
 		class GradeTooHighException: public std::exception
 		{
 			public:
 				virtual char const	*what(void) const throw();
 		};
 		class GradeTooLowException: public std::exception
+		{
+			public:
+				virtual char const	*what(void) const throw();
+		};
+		class IsAlreadySignedException: public std::exception
 		{
 			public:
 				virtual char const	*what(void) const throw();

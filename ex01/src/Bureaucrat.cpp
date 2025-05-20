@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:29:53 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 22:27:11 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/20 11:32:02 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void	Bureaucrat::decrementGrade()
 	this->_grade++;
 	if (this->_grade > 150)
 		throw (Bureaucrat::GradeTooLowException());
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	form.beSigned(*this);
 }
 
 char const* Bureaucrat::GradeTooHighException::what(void) const throw()

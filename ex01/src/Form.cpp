@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:25:59 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 22:44:32 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/20 14:16:58 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,25 @@ bool	Form::getIsSigned() const
 	return (this->_isSigned);
 }
 
-void	Form::beSigned(Bureaucrat &bureaucrat) const
+//  TODO: make an exeption for grade too :)
+
+void	Form::beSigned(Bureaucrat &bureaucrat)
 {
-	
+
+	if(this->_isSigned)
+		throw(IsAlreadySignedException());
+	else if (bureaucrat.getGrade() > this->getGradToSign())
+		throw(GradeTooLowException());
+	else
+	{
+		this->_isSigned = true;
+		std::cout << bureaucrat.getName() << " signed " << this->getName() << std::endl;
+	}
+}
+
+char const* Form::IsAlreadySignedException::what(void) const throw()
+{
+	return ("the form is alreay signed");
 }
 
 char const* Form::GradeTooHighException::what(void) const throw()
@@ -73,11 +89,14 @@ char const* Form::GradeTooHighException::what(void) const throw()
 
 char const* Form::GradeTooLowException::what(void) const throw()
 {
-	return ("Grade is too low");
+	return ("grade too low");
 }
 
 std::ostream &operator<<(std::ostream &os, const Form &form)
 {
-    os << form.getName() << "" << form.getGradToExec();
+    os	<< form.getName() << " is a form... " 
+		<< form.getGradToExec() << " is the minimum grade to execute it "
+		<< form.getGradToSign() << " is the minimum grade to sign it. "
+		<< "Is it signed? : " << form.getIsSigned();
     return os;
 }

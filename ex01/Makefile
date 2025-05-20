@@ -7,11 +7,11 @@ INCS_DIR	=	includes
 MAIN_INC	= -I $(INCS_DIR)
 INCS		=	$(shell find $(INCS_DIR) -type f -name "*.hpp")
 
-SRC			=	main.cpp Bureaucrat.cpp
+SRC			=	main.cpp Bureaucrat.cpp Form.cpp
 				
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
-CC				=	c++
+CC				=	c++ -g
 CFLAGS			=	-Wall -Wextra -Werror -Wpedantic -std=c++98
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
