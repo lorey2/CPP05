@@ -7,7 +7,7 @@ INCS_DIR	=	includes
 MAIN_INC	= -I $(INCS_DIR)
 INCS		=	$(shell find $(INCS_DIR) -type f -name "*.hpp")
 
-SRC			=	main.cpp Bureaucrat.cpp Form.cpp
+SRC			=	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 				
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

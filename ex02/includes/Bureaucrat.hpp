@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:18:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/02 13:36:42 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/12 14:26:54 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Bureaucrat
 		int				getGrade() const;
 		void			incrementGrade();
 		void			decrementGrade();
-		void			signForm(Form &form);
+		void			signForm(AForm &form);
 		class GradeTooHighException: public std::exception
 		{
 			public:

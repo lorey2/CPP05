@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:29:53 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/20 11:32:02 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/12 14:27:02 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	Bureaucrat::decrementGrade()
 		throw (Bureaucrat::GradeTooLowException());
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(AForm &form)
 {
 	form.beSigned(*this);
 }
