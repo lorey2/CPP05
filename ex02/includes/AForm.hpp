@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:19:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/12 15:40:04 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 12:59:50 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Bureaucrat;
 
-class AForm{
+class AForm {
 	protected:
 		const std::string	_name;
 		bool				_isSigned;
@@ -39,22 +39,22 @@ class AForm{
 		void			execute(Bureaucrat const & executor) const;
 		virtual void	performAction() const = 0;
 
-		class GradeTooHighException: public std::exception{
+		class GradeTooHighException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
 
-		class GradeTooLowException: public std::exception{
+		class GradeTooLowException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
 
-		class IsAlreadySignedException: public std::exception{
+		class IsAlreadySignedException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
 
-		class IsNotSignedException: public std::exception{
+		class IsNotSignedException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};

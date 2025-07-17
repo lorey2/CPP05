@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:59:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/12 16:32:56 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 12:58:47 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 #include <cstdlib>
 #include <ctime>
 
-void	testTree()
-{
+void	testTree() {
 	Bureaucrat b("hey", 1);
 	ShrubberyCreationForm s("./hey");
 	PresidentialPardonForm p("oui");

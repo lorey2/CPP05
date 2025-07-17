@@ -6,15 +6,14 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:29:09 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/12 15:52:17 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 12:59:31 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "AForm.hpp"
-class ShrubberyCreationForm : public AForm
-{
+class ShrubberyCreationForm : public AForm {
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string target);
