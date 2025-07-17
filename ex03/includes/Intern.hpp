@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 17:39:18 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/12 17:47:05 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 13:10:17 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "AForm.hpp"
 
-class Intern{
+class Intern {
 	public:
 		Intern();
 		Intern(const Intern &intern);

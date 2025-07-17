@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:18:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/12 14:26:54 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 13:10:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 
 #include "AForm.hpp"
 
-class Bureaucrat
-{
+class Bureaucrat {
 	private:
 		const std::string	_name;
 		int					_grade;
@@ -34,13 +33,11 @@ class Bureaucrat
 		void			incrementGrade();
 		void			decrementGrade();
 		void			signForm(AForm &form);
-		class GradeTooHighException: public std::exception
-		{
+		class GradeTooHighException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
-		class GradeTooLowException: public std::exception
-		{
+		class GradeTooLowException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
