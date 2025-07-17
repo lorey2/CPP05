@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:18:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 21:46:56 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 12:38:03 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include <string>
 #include <iostream>
 
-class Bureaucrat
-{
+class Bureaucrat{
 	private:
 		const std::string	_name;
 		int					_grade;
@@ -31,13 +30,11 @@ class Bureaucrat
 		int				getGrade() const;
 		void			incrementGrade();
 		void			decrementGrade();
-		class GradeTooHighException: public std::exception
-		{
+		class GradeTooHighException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};
-		class GradeTooLowException: public std::exception
-		{
+		class GradeTooLowException: public std::exception {
 			public:
 				virtual char const	*what(void) const throw();
 		};

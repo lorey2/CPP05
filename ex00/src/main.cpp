@@ -6,18 +6,16 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:59:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/19 22:00:47 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/07/17 12:45:01 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // src/main.cpp
-#include "Bureaucrat.hpp" // Assuming Bureaucrat.hpp is in the 'includes' directory
+#include "Bureaucrat.hpp"
 #include <iostream>
-#include <exception> // For std::exception
+#include <exception>
 
-// The main function - entry point of your program
 int main() {
-    // Example Usage of Bureaucrat
     try {
         Bureaucrat b1("Alice", 1); // Highest grade
         std::cout << b1 << std::endl;
@@ -31,10 +29,9 @@ int main() {
         Bureaucrat b2("Bob", 150); // Lowest grade
         std::cout << b2 << std::endl;
 
-        // b2.decrementGrade(); // This should ideally throw GradeTooLowException or print an error
-                            // if you implemented the boundary checks correctly.
+        // b2.decrementGrade();		//GRADTOOLOWEXCEPTION 
 
-        // b1.incrementGrade(); // This should ideally throw GradeTooHighException or print an error.
+        // b1.incrementGrade(); //GRADTOOHIGHEXEPTION
 
 
         Bureaucrat b3("Charlie", 75);
@@ -49,10 +46,10 @@ int main() {
         std::cout << "Original b1 (name should be unchanged): " << b1 << std::endl;
 
 
-        // Test exceptions (if you've implemented them)
+        // Test exceptions
         std::cout << "\n--- Testing Exceptions ---" << std::endl;
         try {
-            Bureaucrat tooHigh("HighScorer", 0); // Should trigger an error or be clamped
+            Bureaucrat tooHigh("HighScorer", 0); //GRAD TOO HIGH
             std::cout << tooHigh << std::endl;
         } catch (const Bureaucrat::GradeTooHighException& e) {
             std::cerr << "Caught exception: " << e.what() << std::endl;
@@ -61,7 +58,7 @@ int main() {
         }
 
         try {
-            Bureaucrat tooLow("LowScorer", 151); // Should trigger an error or be clamped
+            Bureaucrat tooLow("LowScorer", 151); //GRAD TOO LOW
             std::cout << tooLow << std::endl;
         } catch (const Bureaucrat::GradeTooLowException& e) {
             std::cerr << "Caught exception: " << e.what() << std::endl;
@@ -73,7 +70,7 @@ int main() {
         try {
             Bureaucrat top("TopRank", 1);
             std::cout << top << std::endl;
-            top.incrementGrade(); // Attempt to go higher than 1
+            top.incrementGrade(); //GRAD TOO HIGH
             std::cout << "After trying to increment past highest: " << top << std::endl;
         } catch (const Bureaucrat::GradeTooHighException& e) {
             std::cerr << "Caught exception during increment: " << e.what() << std::endl;
@@ -82,8 +79,8 @@ int main() {
 
     } catch (const std::exception& e) {
         std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
-        return 1; // Indicate an error
+        return 1;
     }
 
-    return 0; // Indicate successful execution
+    return 0;
 }
