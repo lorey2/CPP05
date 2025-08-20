@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:59:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 13:09:23 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/20 13:28:43 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void	testTree() {
 	b.signForm(r);
 	b.signForm(*rrf);
 	try {
-	s.execute(b);
-	p.execute(b);
-	r.execute(b);
+		s.execute(b);
+		p.execute(b);
+		r.execute(b);
 	}
 	catch (const RobotomyRequestForm::RobotomizationFailed& e) {
 		std::cerr << "Caught an exception: " << e.what() << std::endl;
 	}
 	try {
-	rrf->execute(b);
+		rrf->execute(b);
 	}
 	catch (const RobotomyRequestForm::RobotomizationFailed& e) {
 		std::cerr << "Caught an exception: " << e.what() << std::endl;

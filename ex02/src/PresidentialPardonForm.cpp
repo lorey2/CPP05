@@ -6,17 +6,17 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:55:43 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 12:57:23 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/08/20 13:22:29 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("Default name", false, 72, 45) {
+PresidentialPardonForm::PresidentialPardonForm(): AForm("Default name", false, 25, 5) {
 	this->_target = "default";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("Robotomy Form", false, 72, 45) {
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("Robotomy Form", false, 25, 5) {
 	this->_target = target;
 }
 
