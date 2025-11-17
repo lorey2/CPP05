@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:19:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 13:09:48 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 11:14:56 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class AForm {
 		AForm();
 		AForm(std::string name, bool isSigned, int gradToSign, int gradToExec);
 		AForm(const AForm &form);
-		~AForm();
+		virtual ~AForm();
 		AForm& operator=(const AForm &form);
 		std::string		getName() const;
 		bool			getIsSigned() const;

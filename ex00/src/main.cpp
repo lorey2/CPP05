@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:59:45 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 12:45:01 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 10:30:52 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int main() {
         Bureaucrat b2("Bob", 150); // Lowest grade
         std::cout << b2 << std::endl;
 
-        // b2.decrementGrade();		//GRADTOOLOWEXCEPTION 
+       // b2.decrementGrade();		//GRADTOOLOWEXCEPTION 
 
-        // b1.incrementGrade(); //GRADTOOHIGHEXEPTION
+        //b1.incrementGrade(); 		//GRADTOOHIGHEXEPTION
 
 
         Bureaucrat b3("Charlie", 75);

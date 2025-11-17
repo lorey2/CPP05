@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:29:53 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 13:07:13 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 11:09:00 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,15 @@ void	Bureaucrat::decrementGrade() {
 }
 
 void	Bureaucrat::signForm(AForm &form) {
-	form.beSigned(*this);
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName()
+				  << " because: " << e.what() << std::endl;
+	}
 }
 
 char const* Bureaucrat::GradeTooHighException::what(void) const throw() {
@@ -70,4 +78,14 @@ char const* Bureaucrat::GradeTooLowException::what(void) const throw() {
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
     os << bureaucrat.getName() << " bureaucrat grade " << bureaucrat.getGrade();
     return os;
+}
+
+void Bureaucrat::executeForm(AForm const & form) {
+	try {
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cout << _name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
+	}
 }

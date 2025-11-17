@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:18:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 13:10:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 11:08:01 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class Bureaucrat {
 		Bureaucrat(const Bureaucrat &bureaucrat);
 		~Bureaucrat();
 		Bureaucrat& operator=(const Bureaucrat &bureaucrat);
+		void executeForm(AForm const & form);
 		std::string		getName() const;
 		int				getGrade() const;
 		void			incrementGrade();

@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:55:43 by lorey             #+#    #+#             */
-/*   Updated: 2025/08/20 13:22:29 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 10:58:38 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ PresidentialPardonForm::PresidentialPardonForm(): AForm("Default name", false, 2
 	this->_target = "default";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("Robotomy Form", false, 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("Presidential Pardon Form", false, 25, 5) {
 	this->_target = target;
 }
 

@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:25:59 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 12:56:24 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/11/17 10:43:52 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ AForm::AForm(const AForm &form): _name(form._name), _isSigned(form._isSigned), _
 void AForm::execute(const Bureaucrat &executor) const {
 	if (_isSigned == false)
 		throw IsNotSignedException();
-	if (this->_gradToSign < executor.getGrade())
+	if (this->_gradToExec < executor.getGrade())
 		throw GradeTooLowException();
 
 	performAction();

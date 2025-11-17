@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 17:39:18 by lorey             #+#    #+#             */
-/*   Updated: 2025/07/17 13:10:17 by lorey            ###   LAUSANNE.ch       */
+/*   Created: 2025/11/17 11:12:50 by lorey             #+#    #+#             */
+/*   Updated: 2025/11/17 11:13:00 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,8 @@ class Intern {
 		~Intern();
 		Intern& operator=(const Intern &intern);
 		AForm* makeForm(const std::string form_name, const std::string target);
+	class FormNotFoundException : public std::exception {
+	public:
+		virtual const char* what() const throw();
+	};
 };
